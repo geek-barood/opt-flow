@@ -36,19 +36,17 @@ int diameter(node *root) {
 }
 
 int opt_diameter(node *root, int& height) {
-	//bug in this algo!
-	//:( need to do it myself
-	//also I'm try git let's see what happens :)
+	// fixed the bug :)
+	int lh = 0, rh = 0;
+	int ldiameter = 0, rdiameter = 0;
 	if(root == NULL) {
 		height = 0;
 		return height;
 	}
-	int ht_l = 0, ht_r = 0;
-	int res = 0;
-	res = opt_diameter(root->left, ht_l);
-	res = max(res, opt_diameter(root->left, ht_r));
-	height = 1+max(ht_l, ht_r);
-	return max(1 + ht_l + ht_r, res);
+	ldiameter = opt_diameter(root->left, lh);
+	rdiameter = opt_diameter(root->left, rh);
+	height = 1+max(lh, rh);
+	return max(1 + lh + rh, max(ldiameter, rdiameter));
 }
 int main() {
 	node *root = add_node(5);
